@@ -8,10 +8,12 @@ TrendPlotter is a program that takes in a csv file with stock data and plots the
 The output should look like the graph in this video: https://youtu.be/XZvwtC5Y3QY
 
 
-A sample csv file of MMM is included for reference, which was downloaded from Yahoo finance. Running the program will open a browse window to select the csv file. In addition, the end of the average trend line computes the 10 year compounded interest from the end of the source (csv) data to the end of the trend line.  In other words, this is the expected rate of return for the ten years of the extended trendline. 
+A sample csv file of MMM is included for reference, which was downloaded from Yahoo finance. 
+***Note that Yahoo Finance no longer provides free historical data downloads. Boo.... I have updated the script to work with https://stooq.com/q/. 
+
+Running the program will open a browse window to select the csv file. In addition, the end of the average trend line computes the 10 year compounded interest from the end of the source (csv) data to the end of the trend line.  In other words, this is the expected rate of return for the ten years of the extended trendline. 
 
 ![plot image](https://github.com/NuncObdurat/financialtools/blob/main/Stock%20Analysis/pointer.png)
-A pre-compiled binary (.exe) for Windows is available here (81MB): [https://drive.google.com/file/d/1-x8CYgkDjfoIGgZQ1nNAwcInXPZXedMN/view?usp=sharing](https://drive.google.com/file/d/10nrN0Bg48y6mCe6FpEPr2E2r4CRgYnKs/view?usp=sharing)
 
 Python instructions and dependencies are below the image. 
 
