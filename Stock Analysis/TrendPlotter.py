@@ -21,12 +21,28 @@ def select_file():
 def plot_trend_data(data_file, position, num_future_years=10, trading_days_per_year=260):
     # Read in the CSV file
     data = pd.read_csv(data_file)
-    # Convert the 'Date' column to a datetime object, skipping the header row
-    date_col = pd.to_datetime(data['Date'].iloc[1:])
+
+    # Convert the 'Date' column to a datetime object, handling different formats dynamically
+    data['Date'] = pd.to_datetime(data['Date'], errors='coerce')  # Automatically infer the date format
+
+    # Drop rows with invalid dates
+    data = data[data['Date'].notna()].reset_index(drop=True)
+
+    # Ensure data is sorted in ascending order by date
+    if not data['Date'].is_monotonic_increasing:
+        data = data.sort_values('Date').reset_index(drop=True)
+
+    # Now use the 'Date' column directly for further operations
+    date_col = data['Date']
+
+
     # Extract the fifth column
     col_data = data.iloc[:, 4]
-    # Convert the data to a numeric type
-    col_data = pd.to_numeric(col_data)
+    # Convert the data to a numeric type after removing any $ symbols if necessary
+    if col_data.dtype == 'object':  # Check if the column is of type object (likely string)
+        col_data = col_data.str.replace('$', '', regex=False)  # Remove $ if present
+    col_data = pd.to_numeric(col_data)  # Convert to numeric regardless of the initial format
+
 
     # Calculate the max, min and average values for the last 1000 data points
     last_series = col_data[-1000:]
